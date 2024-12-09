@@ -1,0 +1,158 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Raleway:wght@300;400;500;600&family=Dancing+Script&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #F3F7F0;
+  --foreground: #2C3E50;
+  --primary: #8B9F7B;
+  --primary-foreground: #FFFFFF;
+  --secondary: #E8D5A6;
+  --secondary-foreground: #2C3E50;
+  --tertiary: #DCC4A1;
+  --accent: #768C72;
+  --accent-foreground: #FFFFFF;
+  --muted: #E5E5E5;
+  --muted-foreground: #6C7A89;
+  --card: #FFFFFF;
+  --card-foreground: #2C3E50;
+  --border: #DCC4A1;
+  --input: #E5E7EB;
+  --ring: #A3B3A0;
+  --nav-bg: #2C3E50;
+  --nav-text: #FFFFFF;
+}
+
+.dark {
+  --background: #1F2937;
+  --foreground: #F3F4F6;
+  --primary: #7EB77F;
+  --primary-foreground: #1F2937;
+  --secondary: #6B8CAE;
+  --secondary-foreground: #F3F4F6;
+  --accent: #F7C873;
+  --accent-foreground: #1F2937;
+  --muted: #374151;
+  --muted-foreground: #9CA3AF;
+  --card: #2D3748;
+  --card-foreground: #F3F4F6;
+  --border: #4B5563;
+  --input: #4B5563;
+  --ring: #7EB77F;
+  --nav-bg: #F3F4F6;
+  --nav-text: #1F2937;
+}
+
+body {
+  font-family: 'Raleway', sans-serif;
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Playfair Display', serif;
+}
+
+.impressionist-bg {
+  background-image: url('/impressionist-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.blur-overlay {
+  backdrop-filter: blur(5px);
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.hero-bg {
+  background-image: url('https://images.unsplash.com/photo-1643841368618-4aa128ae63c2?q=80&w=2070&auto=format&fit=crop');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Calendar Styles */
+.rdp {
+  --rdp-cell-size: 40px;
+  --rdp-accent-color: var(--primary);
+  --rdp-background-color: var(--card);
+  --rdp-accent-color-dark: var(--primary);
+  --rdp-background-color-dark: var(--card);
+  --rdp-outline: 2px solid var(--ring);
+  --rdp-outline-selected: 3px solid var(--ring);
+  margin: 1em;
+}
+
+.rdp-day_selected,
+.rdp-day_selected:focus-visible,
+.rdp-day_selected:hover {
+  background-color: var(--primary);
+  color: var(--primary-foreground);
+}
+
+.font-cursive {
+  font-family: 'Dancing Script', cursive;
+}
+
+.bg-primary {
+  background-color: var(--primary);
+}
+
+.bg-secondary {
+  background-color: var(--secondary);
+}
+
+.bg-tertiary {
+  background-color: var(--tertiary);
+}
+
+.bg-accent {
+  background-color: var(--accent);
+}
+
+.text-primary {
+  color: var(--primary);
+}
+
+.text-secondary {
+  color: var(--secondary);
+}
+
+.text-tertiary {
+  color: var(--tertiary);
+}
+
+.text-accent {
+  color: var(--accent);
+}
+
+.border-tertiary {
+  border-color: var(--tertiary);
+}
+
+/* Navigation Styles */
+.nav-bg {
+  background-color: var(--nav-bg);
+}
+
+.nav-text {
+  color: var(--nav-text);
+}
