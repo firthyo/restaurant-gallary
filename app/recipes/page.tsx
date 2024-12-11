@@ -106,7 +106,7 @@ export default function Recipes() {
                     className={cn(
                       "px-4 py-2 rounded-full border text-sm transition-colors",
                       selectedCategory === category.id
-                        ? "bg-primary text-primary-foreground border-primary"
+                        ? "bg-secondary text-primary-foreground border-primary "
                         : "border-border text-foreground hover:border-primary"
                     )}
                   >

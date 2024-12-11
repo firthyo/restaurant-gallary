@@ -9,10 +9,10 @@
   --foreground: #2C3E50;
   --primary: #8B9F7B;
   --primary-foreground: #FFFFFF;
-  --secondary: #E8D5A6;
+  --secondary: #fff8ea;
   --secondary-foreground: #2C3E50;
   --tertiary: #DCC4A1;
-  --accent: #768C72;
+  --accent: #7a2f02;
   --accent-foreground: #FFFFFF;
   --muted: #E5E5E5;
   --muted-foreground: #6C7A89;
@@ -23,6 +23,11 @@
   --ring: #A3B3A0;
   --nav-bg: #2C3E50;
   --nav-text: #FFFFFF;
+
+  --olive-green: #708238;
+  --rust-orange: #7a2f02;
+  --soft-cream: #fceee8;
+  --light: #edf5ce
 }
 
 .dark {
@@ -128,8 +133,37 @@ h6 {
   background-color: var(--accent);
 }
 
+.bg-muted {
+  background-color: var(--muted);
+}
+
+.bg-olive {
+  background-color: var(--olive-green)
+}
+
+.bg-rust-orange {
+  background-color: var(--rust-orange);
+}
+
+.text-dark-blue {
+  color: var(--dark-blue);
+}
+
+
+.bg-calendar {
+  background-color: var(--background);
+}
+
+.text-olive {
+  color: var(--olive-green)
+}
+
 .text-primary {
   color: var(--primary);
+}
+
+.text-rust-orange {
+  color: var(--rust-orange);
 }
 
 .text-secondary {
@@ -144,8 +178,16 @@ h6 {
   color: var(--accent);
 }
 
+.text-white {
+  color: var(--nav-text);
+}
+
 .border-tertiary {
   border-color: var(--tertiary);
+}
+
+.border-primary {
+  border-color: var(--rust-orange);
 }
 
 /* Navigation Styles */

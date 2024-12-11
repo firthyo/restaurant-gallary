@@ -63,7 +63,7 @@ export function CalendarView({ selectedDate, onSelectDate, availableSlots }: Cal
                 !isCurrentMonth && "text-gray-400",
                 isToday && "border-primary",
                 isSelected && "bg-primary text-primary-foreground",
-                isAvailable && !isSelected && "bg-green-100 hover:bg-green-200",
+                isAvailable && !isSelected && "bg-calendar hover:bg-amber-100",
                 !isAvailable && "bg-gray-100"
               )}
               disabled={!isAvailable}

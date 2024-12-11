@@ -162,7 +162,7 @@ export default function Menu() {
                 className={cn(
                   "px-4 py-2 rounded-full border text-sm transition-colors",
                   selectedCategory === category.id
-                    ? "bg-primary text-primary-foreground border-primary"
+                    ? "bg-secondary text-primary-foreground border-primary"
                     : "border-border text-foreground hover:border-primary"
                 )}
               >
@@ -177,7 +177,7 @@ export default function Menu() {
           {filteredItems.map((item) => (
             <div
               key={item.id}
-              className="bg-card rounded-lg overflow-hidden shadow-lg"
+              className="bg-card rounded-lg overflow-hidden border"
             >
               <div className="relative">
                 <Image
@@ -191,7 +191,7 @@ export default function Menu() {
                 {item.tags?.map((tag) => (
                   <Badge
                     key={tag}
-                    className="absolute top-2 left-2 bg-accent text-accent-foreground"
+                    className="absolute top-2 left-2 bg-secondary text-accent-foreground"
                   >
                     {tag}
                   </Badge>

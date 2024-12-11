@@ -1,173 +1,192 @@
-'use client'
+"use client";
 
-import { useState, useRef } from 'react'
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
-import { cn } from "@/lib/utils"
-import Header from '@/components/Header'
-import Footer from '@/components/Footer'
-import { DateTimePicker } from "@/components/ui/date-time-picker"
-import { format } from 'date-fns'
-import CustomizeMenu, { CustomizeMenuHandle } from '@/components/CustomizeMenu'
-import BookingTicket from '@/components/BookingTicket'
+import { useState, useRef } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { cn } from "@/lib/utils";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import { DateTimePicker } from "@/components/ui/date-time-picker";
+import { format } from "date-fns";
+import CustomizeMenu, { CustomizeMenuHandle } from "@/components/CustomizeMenu";
+import BookingTicket from "@/components/BookingTicket";
 
 // Booking steps
-const steps = ['Select Experience', 'Date and Time', 'Guest Information', 'Confirmation', 'Your Ticket']
+const steps = [
+  "Select Experience",
+  "Date and Time",
+  "Guest Information",
+  "Confirmation",
+  "Your Ticket",
+];
 
 interface BookingData {
-  courseType: '5-course' | '7-course' | 'custom'
-  dietaryRestrictions: string
-  date: Date | null
-  guests: number
-  name: string
-  phone: string
-  email: string
-  customSelections: string[]
-  confirmationCode?: string
+  courseType: "5-course" | "7-course" | "custom";
+  dietaryRestrictions: string;
+  date: Date | null;
+  guests: number;
+  name: string;
+  phone: string;
+  email: string;
+  customSelections: string[];
+  confirmationCode?: string;
 }
 
 const courseDetails = {
-  '5-course': {
+  "5-course": {
     price: 150,
     courses: [
       {
-        title: 'Amuse-bouche',
-        description: "Chef's daily inspiration"
+        title: "Amuse-bouche",
+        description: "Chef's daily inspiration",
       },
       {
-        title: 'First Course',
-        description: 'Seasonal garden vegetables with herb emulsion'
+        title: "First Course",
+        description: "Seasonal garden vegetables with herb emulsion",
       },
       {
-        title: 'Second Course',
-        description: 'Wild-caught seafood selection'
+        title: "Second Course",
+        description: "Wild-caught seafood selection",
       },
       {
-        title: 'Main Course',
-        description: 'Choice of land or sea'
+        title: "Main Course",
+        description: "Choice of land or sea",
       },
       {
-        title: 'Dessert',
-        description: 'Artisanal sweet creation'
-      }
-    ]
+        title: "Dessert",
+        description: "Artisanal sweet creation",
+      },
+    ],
   },
-  '7-course': {
+  "7-course": {
     price: 200,
     courses: [
       {
-        title: 'Amuse-bouche',
-        description: "Chef's daily inspiration"
+        title: "Amuse-bouche",
+        description: "Chef's daily inspiration",
       },
       {
-        title: 'First Course',
-        description: 'Seasonal garden vegetables with herb emulsion'
+        title: "First Course",
+        description: "Seasonal garden vegetables with herb emulsion",
       },
       {
-        title: 'Second Course',
-        description: 'Wild-caught seafood selection'
+        title: "Second Course",
+        description: "Wild-caught seafood selection",
       },
       {
-        title: 'Third Course',
-        description: 'Handmade pasta with seasonal truffle'
+        title: "Third Course",
+        description: "Handmade pasta with seasonal truffle",
       },
       {
-        title: 'Fourth Course',
-        description: 'Aged beef tartare with caviar'
+        title: "Fourth Course",
+        description: "Aged beef tartare with caviar",
       },
       {
-        title: 'Main Course',
-        description: 'Choice of land or sea'
+        title: "Main Course",
+        description: "Choice of land or sea",
       },
       {
-        title: 'Dessert',
-        description: 'Artisanal sweet creation'
-      }
-    ]
-  }
-}
+        title: "Dessert",
+        description: "Artisanal sweet creation",
+      },
+    ],
+  },
+};
 
 export default function ChefsTable() {
-  const [isBooking, setIsBooking] = useState(false)
-  const [step, setStep] = useState(0)
+  const [isBooking, setIsBooking] = useState(false);
+  const [step, setStep] = useState(0);
   const [bookingData, setBookingData] = useState<BookingData>({
-    courseType: '5-course',
-    dietaryRestrictions: '',
+    courseType: "5-course",
+    dietaryRestrictions: "",
     date: null,
     guests: 1,
-    name: '',
-    phone: '',
-    email: '',
-    customSelections: []
-  })
-  const [showTicket, setShowTicket] = useState(false)
-  const customizeMenuRef = useRef<CustomizeMenuHandle>(null)
+    name: "",
+    phone: "",
+    email: "",
+    customSelections: [],
+  });
+  const [showTicket, setShowTicket] = useState(false);
+  const customizeMenuRef = useRef<CustomizeMenuHandle>(null);
 
-  const handleCourseTypeSelect = (type: '5-course' | '7-course' | 'custom') => {
-    setBookingData(prev => ({ ...prev, courseType: type }))
-  }
+  const handleCourseTypeSelect = (type: "5-course" | "7-course" | "custom") => {
+    setBookingData((prev) => ({ ...prev, courseType: type }));
+  };
 
   const handleDateTimeSelect = (selectedDateTime: Date) => {
-    setBookingData(prev => ({
+    setBookingData((prev) => ({
       ...prev,
       date: selectedDateTime,
-    }))
-    setStep(1) // Automatically move to the next step after date selection
-  }
+    }));
+    setStep(1); // Automatically move to the next step after date selection
+  };
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    const { name, value } = e.target
-    setBookingData(prev => ({ ...prev, [name]: value }))
-  }
+    const { name, value } = e.target;
+    setBookingData((prev) => ({ ...prev, [name]: value }));
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    const customSelections = customizeMenuRef.current?.getSelections() || []
-    const confirmationCode = Math.random().toString(36).substring(2, 10).toUpperCase()
-    setBookingData(prev => ({ ...prev, customSelections, confirmationCode }))
-    setShowTicket(true)
-  }
+    e.preventDefault();
+    const customSelections = customizeMenuRef.current?.getSelections() || [];
+    const confirmationCode = Math.random()
+      .toString(36)
+      .substring(2, 10)
+      .toUpperCase();
+    setBookingData((prev) => ({ ...prev, customSelections, confirmationCode }));
+    setShowTicket(true);
+  };
 
   const handleDownloadTicket = () => {
     // Implement PDF download logic here
-    console.log('Downloading ticket...')
-  }
+    console.log("Downloading ticket...");
+  };
 
   const handleShareTicket = () => {
     // Implement sharing logic here
-    console.log('Sharing ticket...')
-  }
+    console.log("Sharing ticket...");
+  };
 
   const resetBooking = () => {
     setBookingData({
-      courseType: '5-course',
-      dietaryRestrictions: '',
+      courseType: "5-course",
+      dietaryRestrictions: "",
       date: null,
       guests: 1,
-      name: '',
-      phone: '',
-      email: '',
-      customSelections: []
-    })
-    setIsBooking(false)
-    setStep(0)
-    setShowTicket(false)
-  }
+      name: "",
+      phone: "",
+      email: "",
+      customSelections: [],
+    });
+    setIsBooking(false);
+    setStep(0);
+    setShowTicket(false);
+  };
 
   const canProceed = () => {
     switch (step) {
-      case 0: return bookingData.date !== null
-      case 1: return bookingData.guests > 0 && bookingData.name && bookingData.phone && bookingData.email
-      case 2: return true
-      default: return false
+      case 0:
+        return bookingData.date !== null;
+      case 1:
+        return (
+          bookingData.guests > 0 &&
+          bookingData.name &&
+          bookingData.phone &&
+          bookingData.email
+        );
+      case 2:
+        return true;
+      default:
+        return false;
     }
-  }
+  };
 
-  const selectedCourseDetails = courseDetails[bookingData.courseType as '5-course' | '7-course']
+  const selectedCourseDetails =
+    courseDetails[bookingData.courseType as "5-course" | "7-course"];
 
   return (
     <div className="min-h-screen bg-[var(--background)]">
@@ -179,30 +198,37 @@ export default function ChefsTable() {
             Chef's Table Experience
           </h1>
           <p className="text-gray-600 mb-8">
-            Experience an exclusive culinary journey with our Chef's Table. 
+            Experience an exclusive culinary journey with our Chef's Table.{" "}
+            <br />
             Tailored to your preferences and hosted by our head chef.
           </p>
+
+          <div className="border-b border-gray-200 m-6" />
 
           {!isBooking && (
             <>
               <div className="flex flex-col sm:flex-row justify-center gap-4 mb-12">
-                {['5-course', '7-course', 'custom'].map((type) => (
+                {["5-course", "7-course", "custom"].map((type) => (
                   <button
                     key={type}
-                    onClick={() => handleCourseTypeSelect(type as '5-course' | '7-course' | 'custom')}
+                    onClick={() =>
+                      handleCourseTypeSelect(
+                        type as "5-course" | "7-course" | "custom"
+                      )
+                    }
                     className={cn(
                       "w-full sm:w-48 py-2 px-4 text-lg font-medium rounded-md transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[var(--olive-green)] focus:ring-opacity-50",
                       bookingData.courseType === type
-                        ? "bg-[var(--olive-green)] text-white shadow-md"
-                        : "bg-white text-[var(--olive-green)] border-2 border-[var(--olive-green)] hover:bg-[var(--olive-green)]/10"
+                        ? "bg-[var(--olive-green)] text-white shadow-md px-4 py-4 rounded-full text-sm transition-colors"
+                        : "bg-white text-[var(--olive-green)] border-2 hover:bg-[var(--olive-green)]/10 px-4 py-4 rounded-full border text-sm transition-colors"
                     )}
                   >
-                    {type === 'custom' ? 'Customize' : `${type} Experience`}
+                    {type === "custom" ? "Customize" : `${type} Experience`}
                   </button>
                 ))}
               </div>
 
-              {bookingData.courseType === 'custom' ? (
+              {bookingData.courseType === "custom" ? (
                 <CustomizeMenu ref={customizeMenuRef} />
               ) : (
                 <div className="space-y-8 text-left">
@@ -225,7 +251,7 @@ export default function ChefsTable() {
                   onChange={handleInputChange}
                   className="mb-6"
                 />
-                <Button 
+                <Button
                   onClick={() => setIsBooking(true)}
                   className="bg-[var(--rust-orange)] text-[var(--soft-cream)] hover:bg-[var(--olive-green)] w-full md:w-auto"
                 >
@@ -241,11 +267,20 @@ export default function ChefsTable() {
               <div className="flex justify-between items-center mb-8">
                 {steps.map((stepName, index) => (
                   <div key={index} className="flex flex-col items-center">
-                    <div className={cn(
-                      "w-8 h-8 rounded-full flex items-center justify-center text-[var(--soft-cream)] mb-2",
-                      showTicket ? (index === 4 ? "bg-[var(--accent)]" : "bg-[var(--primary)]") :
-                      (step > index ? "bg-[var(--primary)]" : step === index ? "bg-[var(--accent)]" : "bg-[var(--tertiary)]")
-                    )}>
+                    <div
+                      className={cn(
+                        "w-8 h-8 rounded-full flex items-center justify-center mb-2",
+                        showTicket
+                          ? index === 4
+                            ? "bg-[var(--accent)] "
+                            : "bg-[var(--primary)]"
+                          : step > index
+                          ? "bg-[var(--foreground)] text-[var(--soft-cream)]"
+                          : step === index
+                          ? "bg-[var(--foreground)] text-[var(--soft-cream)] "
+                          : "bg-[var(--muted)]  text-[var(--foreground)]"
+                      )}
+                    >
                       {index + 1}
                     </div>
                     <span className="text-sm text-center">{stepName}</span>
@@ -255,7 +290,9 @@ export default function ChefsTable() {
 
               {step === 0 && (
                 <div className="space-y-8">
-                  <h2 className="text-2xl font-bold text-[var(--olive-green)] mb-4">Select Date and Time</h2>
+                  <h2 className="text-2xl font-bold text-[var(--olive-green)] mb-4">
+                    Select Date and Time
+                  </h2>
                   <DateTimePicker
                     selectedDateTime={bookingData.date || undefined}
                     onSelect={handleDateTimeSelect}
@@ -265,50 +302,52 @@ export default function ChefsTable() {
 
               {step === 1 && (
                 <div className="space-y-8">
-                  <h2 className="text-2xl font-bold text-[var(--olive-green)] mb-4">Guest Information</h2>
+                  <h2 className="text-2xl font-bold text-[var(--olive-green)] mb-4">
+                    Guest Information
+                  </h2>
                   <form className="space-y-4">
-                    <div>
+                    <div className="text-center">
                       <Label htmlFor="guests">Number of Guests</Label>
-                      <Input 
-                        id="guests" 
-                        name="guests" 
-                        type="number" 
-                        min="1" 
-                        value={bookingData.guests} 
-                        onChange={handleInputChange} 
-                        required 
+                      <Input
+                        id="guests"
+                        name="guests"
+                        type="number"
+                        min="1"
+                        value={bookingData.guests}
+                        onChange={handleInputChange}
+                        required
                       />
                     </div>
                     <div>
                       <Label htmlFor="name">Name</Label>
-                      <Input 
-                        id="name" 
-                        name="name" 
-                        value={bookingData.name} 
-                        onChange={handleInputChange} 
-                        required 
+                      <Input
+                        id="name"
+                        name="name"
+                        value={bookingData.name}
+                        onChange={handleInputChange}
+                        required
                       />
                     </div>
                     <div>
                       <Label htmlFor="phone">Phone</Label>
-                      <Input 
-                        id="phone" 
-                        name="phone" 
-                        type="tel" 
-                        value={bookingData.phone} 
-                        onChange={handleInputChange} 
-                        required 
+                      <Input
+                        id="phone"
+                        name="phone"
+                        type="tel"
+                        value={bookingData.phone}
+                        onChange={handleInputChange}
+                        required
                       />
                     </div>
                     <div>
                       <Label htmlFor="email">Email</Label>
-                      <Input 
-                        id="email" 
-                        name="email" 
-                        type="email" 
-                        value={bookingData.email} 
-                        onChange={handleInputChange} 
-                        required 
+                      <Input
+                        id="email"
+                        name="email"
+                        type="email"
+                        value={bookingData.email}
+                        onChange={handleInputChange}
+                        required
                       />
                     </div>
                   </form>
@@ -317,27 +356,58 @@ export default function ChefsTable() {
 
               {step === 2 && (
                 <div className="space-y-8">
-                  <h2 className="text-2xl font-bold text-[var(--olive-green)] mb-4">Confirm Your Booking</h2>
+                  <h2 className="text-2xl font-bold text-[var(--olive-green)] mb-4">
+                    Confirm Your Booking
+                  </h2>
                   <div className="bg-white p-6 rounded-lg shadow-md text-left">
-                    <h3 className="text-xl font-semibold mb-4">Booking Summary</h3>
-                    <p><strong>Experience:</strong> {bookingData.courseType} Experience</p>
-                    <p><strong>Date & Time:</strong> {bookingData.date ? format(bookingData.date, "PPP 'at' p") : 'Not selected'}</p>
-                    <p><strong>Guests:</strong> {bookingData.guests}</p>
-                    <p><strong>Name:</strong> {bookingData.name}</p>
-                    <p><strong>Phone:</strong> {bookingData.phone}</p>
-                    <p><strong>Email:</strong> {bookingData.email}</p>
+                    <h3 className="text-xl font-semibold mb-4">
+                      Booking Summary
+                    </h3>
+                    <p>
+                      <strong>Experience:</strong> {bookingData.courseType}{" "}
+                      Experience
+                    </p>
+                    <p>
+                      <strong>Date & Time:</strong>{" "}
+                      {bookingData.date
+                        ? format(bookingData.date, "PPP 'at' p")
+                        : "Not selected"}
+                    </p>
+                    <p>
+                      <strong>Guests:</strong> {bookingData.guests}
+                    </p>
+                    <p>
+                      <strong>Name:</strong> {bookingData.name}
+                    </p>
+                    <p>
+                      <strong>Phone:</strong> {bookingData.phone}
+                    </p>
+                    <p>
+                      <strong>Email:</strong> {bookingData.email}
+                    </p>
                     {bookingData.dietaryRestrictions && (
-                      <p><strong>Dietary Restrictions:</strong> {bookingData.dietaryRestrictions}</p>
+                      <p>
+                        <strong>Dietary Restrictions:</strong>{" "}
+                        {bookingData.dietaryRestrictions}
+                      </p>
                     )}
                     {bookingData.customSelections.length > 0 && (
-                      <p><strong>Custom Selections:</strong> {bookingData.customSelections.join(', ')}</p>
+                      <p>
+                        <strong>Custom Selections:</strong>{" "}
+                        {bookingData.customSelections.join(", ")}
+                      </p>
                     )}
                     <p className="text-xl font-semibold mt-4">
-                      Total: ${bookingData.courseType === '5-course' ? 150 * bookingData.guests : bookingData.courseType === '7-course' ? 200 * bookingData.guests : 0}
+                      Total: $
+                      {bookingData.courseType === "5-course"
+                        ? 150 * bookingData.guests
+                        : bookingData.courseType === "7-course"
+                        ? 200 * bookingData.guests
+                        : 0}
                     </p>
                   </div>
-                  <Button 
-                    onClick={handleSubmit} 
+                  <Button
+                    onClick={handleSubmit}
                     className="w-full bg-[var(--rust-orange)] text-[var(--soft-cream)] hover:bg-[var(--olive-green)]"
                   >
                     Confirm and Pay
@@ -347,16 +417,19 @@ export default function ChefsTable() {
 
               {showTicket && (
                 <div className="space-y-8">
-                  <h2 className="text-2xl font-bold text-[var(--primary)] mb-4">Your Ticket</h2>
+                  <h2 className="text-2xl font-bold text-[var(--primary)] mb-4">
+                    Your Ticket
+                  </h2>
                   <p className="text-center text-xl text-[var(--accent)] mb-6">
-                    Your booking is confirmed! Thank you for choosing the Chef's Table Experience.
+                    Your booking is confirmed! Thank you for choosing the Chef's
+                    Table Experience.
                   </p>
                   <BookingTicket
                     bookingData={bookingData as Required<BookingData>}
                     onDownload={handleDownloadTicket}
                     onShare={handleShareTicket}
                   />
-                  <Button 
+                  <Button
                     onClick={resetBooking}
                     className="w-full bg-[var(--primary)] text-[var(--soft-cream)] hover:bg-[var(--primary)]/90"
                   >
@@ -369,16 +442,16 @@ export default function ChefsTable() {
                 {!showTicket && (
                   <>
                     {step > 0 && (
-                      <Button 
-                        onClick={() => setStep(step - 1)} 
+                      <Button
+                        onClick={() => setStep(step - 1)}
                         variant="outline"
                       >
                         Back
                       </Button>
                     )}
                     {step < 3 && (
-                      <Button 
-                        onClick={() => setStep(step + 1)} 
+                      <Button
+                        onClick={() => setStep(step + 1)}
                         disabled={!canProceed()}
                         className="ml-auto bg-[var(--accent)] text-[var(--soft-cream)] hover:bg-[var(--accent)]/90"
                       >
@@ -386,8 +459,8 @@ export default function ChefsTable() {
                       </Button>
                     )}
                     {step === 3 && (
-                      <Button 
-                        onClick={handleSubmit} 
+                      <Button
+                        onClick={handleSubmit}
                         className="ml-auto bg-[var(--accent)] text-[var(--soft-cream)] hover:bg-[var(--accent)]/90"
                       >
                         Confirm Booking
@@ -403,6 +476,5 @@ export default function ChefsTable() {
 
       <Footer />
     </div>
-  )
+  );
 }
-

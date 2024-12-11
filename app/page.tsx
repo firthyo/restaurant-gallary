@@ -51,7 +51,6 @@ export default function Home() {
                   image:
                     "https://images.unsplash.com/photo-1579711220373-155ffc441b36?q=80&w=2070&auto=format&fit=crop",
                 },
-                
               ].map((dish) => (
                 <div
                   key={dish.name}
@@ -62,10 +61,10 @@ export default function Home() {
                     alt={dish.name}
                     width={400}
                     height={300}
-                    className="w-full h-48 object-cover"
+                    className="w-full h-68 object-cover"
                   />
                   <div className="p-4">
-                    <h3 className="font-serif italic text-xl text-primary">
+                    <h3 className="font-serif text-center italic text-xl text-olive">
                       {dish.name}
                     </h3>
                   </div>
