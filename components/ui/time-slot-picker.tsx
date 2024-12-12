@@ -28,9 +28,10 @@ export function TimeSlotPicker({
             {availableSlots.map((slot) => (
               <Button
                 key={slot}
-                variant={selectedTime === slot ? "default" : "outline"}
+                className="w-full border-secondary"
+                
+                variant={selectedTime === slot ? "calendar" : "calendarOutline"}
                 onClick={() => onSelectTime(slot)}
-                className="w-full border-secondary text-calendar"
               >
                 {slot}
               </Button>

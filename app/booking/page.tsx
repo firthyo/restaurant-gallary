@@ -110,10 +110,10 @@ export default function Booking() {
                 className={cn(
                   "w-8 h-8 rounded-full flex items-center justify-center text-primary-foreground mb-2",
                   step > index + 1
-                    ? "bg-primary"
+                    ? "bg-[var(--foreground)] text-[var(--soft-cream)]"
                     : step === index + 1
-                    ? "bg-tertiary"
-                    : "bg-muted"
+                    ? "bg-[var(--foreground)] text-[var(--soft-cream)]"
+                    : "bg-[var(--muted)] text-[var(--foreground)]"
                 )}
               >
                 {index + 1}
@@ -125,18 +125,18 @@ export default function Booking() {
         <div className="border-b border-gray-200 m-6" />
         {step === 1 && (
           <div>
-            <h2 className="text-2xl font-bold text-accent mb-4 text-center">
+            <h2 className="text-2xl font-bold text-olive mb-4 text-center">
               Step 1: Select a Table
             </h2>
 
             {/* Table Status Legend */}
             <div className="flex justify-center gap-8 mb-8">
               <div className="flex items-center gap-2">
-                <div className="w-6 h-6 border-2 border-primary bg-card rounded"></div>
+                <div className="w-6 h-6 border-2 border-calendar bg-card rounded"></div>
                 <span>Available</span>
               </div>
               <div className="flex items-center gap-2">
-                <div className="w-6 h-6 bg-primary rounded text"></div>
+                <div className="w-6 h-6 bg-foreground rounded text"></div>
                 <span>Selected</span>
               </div>
               <div className="flex items-center gap-2">
@@ -155,17 +155,17 @@ export default function Booking() {
                     disabled={status === "unavailable"}
                     className={cn(
                       "h-48 rounded-lg relative transition-all duration-200 rounded",
-                      status === "selected" && "bg-primary  text-white",
+                      status === "selected" && "bg-foreground text-white",
                       status === "unavailable" && "bg-muted cursor-not-allowed",
                       status === "available" &&
-                        "bg-card border-2 border-primary hover:border-accent"
+                        "bg-card border-2 border-calendar hover:border-accent"
                     )}
                   >
                     <Badge
                       className={cn(
                         "absolute top-2 right-2 bg-secondary text-secondary-foreground",
                         status === "selected" &&
-                          "bg-secondary text-accent-foreground"
+                          "bg-secondary text-calendar"
                       )}
                     >
                       {table.location}
@@ -185,7 +185,7 @@ export default function Booking() {
 
         {step === 2 && (
           <div>
-            <h2 className="text-2xl font-bold text-accent mb-4">
+            <h2 className="text-2xl font-bold text-olive mb-4">
               Step 2: Choose Date & Time
             </h2>
             <div className="w-full mx-auto">
@@ -200,7 +200,7 @@ export default function Booking() {
 
         {step === 3 && (
           <div>
-            <h2 className="text-2xl font-bold text-accent mb-4">
+            <h2 className="text-2xl font-bold text-olive mb-4">
               Step 3: Customer Information
             </h2>
             <form className="space-y-4">
@@ -253,7 +253,7 @@ export default function Booking() {
 
         {step === 4 && (
           <div>
-            <h2 className="text-2xl font-bold text-accent mb-4">
+            <h2 className="text-2xl font-bold text-olive mb-4">
               Step 4: Confirm Booking
             </h2>
             <div className="bg-card p-6 rounded-lg shadow-md mb-6">

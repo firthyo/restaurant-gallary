@@ -402,7 +402,7 @@ export default function ChefsTable() {
                         : 0}
                     </p>
                   </div>
-                  <Button onClick={handleSubmit}>Confirm and Pay</Button>
+                  {/* <Button onClick={handleSubmit}>Confirm and Pay</Button> */}
                 </div>
               )}
 
@@ -420,10 +420,7 @@ export default function ChefsTable() {
                     onDownload={handleDownloadTicket}
                     onShare={handleShareTicket}
                   />
-                  <Button
-                    onClick={resetBooking}
-                    className="w-full bg-[var(--primary)] text-[var(--soft-cream)] hover:bg-[var(--primary)]/90"
-                  >
+                  <Button onClick={resetBooking}>
                     Book Another Experience
                   </Button>
                 </div>
@@ -451,7 +448,7 @@ export default function ChefsTable() {
                     {step === 3 && (
                       <Button
                         onClick={handleSubmit}
-                        className="ml-auto bg-[var(--accent)] text-[var(--soft-cream)] hover:bg-[var(--accent)]/90"
+                        className="ml-auto hover:bg-[var(--accent)]/90"
                       >
                         Confirm Booking
                       </Button>

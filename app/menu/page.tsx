@@ -202,7 +202,7 @@ export default function Menu() {
                   <h2 className="text-xl font-bold text-primary">
                     {item.name}
                   </h2>
-                  <span className="text-lg font-bold text-accent">
+                  <span className="text-lg font-bold text-primary">
                     ${item.price}
                   </span>
                 </div>

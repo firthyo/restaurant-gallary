@@ -80,7 +80,7 @@ export default function Home() {
                   the aesthetics of fine dining. Each dish is a masterpiece,
                   crafted to delight both your palate and your eyes.
                 </p>
-                <Button asChild variant="outline">
+                <Button asChild variant="calendarOutline" >
                   <Link href="/about">Discover Our Story</Link>
                 </Button>
               </div>
