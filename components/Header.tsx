@@ -37,10 +37,10 @@ const Header = () => {
           </ul>
           <Button
             asChild
-            variant="outline"
-            className="hidden md:inline-flex border-white text-white hover:bg-white hover:text-primary"
+            // variant="outline"
+            className="bg-secondary hidden md:inline-flex border-white text-olive hover:bg-white hover:text-olive"
           >
-            <Link href="/booking">Make a Reservation</Link>
+            <Link href="/booking">Reserve a Table</Link>
           </Button>
           <Button className="md:hidden" variant="ghost" size="icon">
             <svg

@@ -18,13 +18,6 @@ export default function Home() {
               Culinary Artistry
             </h1>
             <p className="text-xl mb-8">Experience dining as a work of art</p>
-            <Button
-              asChild
-              size="lg"
-              className="bg-accent text-accent-foreground hover:bg-accent/90"
-            >
-              <Link href="/booking">Reserve a Table</Link>
-            </Button>
           </div>
         </section>
 

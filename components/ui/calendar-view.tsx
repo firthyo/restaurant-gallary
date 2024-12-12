@@ -59,11 +59,11 @@ export function CalendarView({ selectedDate, onSelectDate, availableSlots }: Cal
               key={day.toString()}
               variant="outline"
               className={cn(
-                "h-10 w-full p-0 font-normal",
+                "h-10 w-full p-0 font-normal border-secondary text-calendar",
                 !isCurrentMonth && "text-gray-400",
-                isToday && "border-primary",
-                isSelected && "bg-primary text-primary-foreground",
-                isAvailable && !isSelected && "bg-calendar hover:bg-amber-100",
+                isToday && "border-secondary text-calendar",
+                isSelected && "bg-foreground text-white",
+                isAvailable && !isSelected && "bg-calendar hover:bg-tertiary",
                 !isAvailable && "bg-gray-100"
               )}
               disabled={!isAvailable}

@@ -217,10 +217,10 @@ export default function ChefsTable() {
                       )
                     }
                     className={cn(
-                      "w-full sm:w-48 py-2 px-4 text-lg font-medium rounded-md transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[var(--olive-green)] focus:ring-opacity-50",
+                      "px-4 py-2 rounded-full border text-sm transition-colors",
                       bookingData.courseType === type
-                        ? "bg-[var(--olive-green)] text-white shadow-md px-4 py-4 rounded-full text-sm transition-colors"
-                        : "bg-white text-[var(--olive-green)] border-2 hover:bg-[var(--olive-green)]/10 px-4 py-4 rounded-full border text-sm transition-colors"
+                        ? "bg-foreground text-white"
+                        : "border-border text-foreground hover:border-primary"
                     )}
                   >
                     {type === "custom" ? "Customize" : `${type} Experience`}
@@ -253,9 +253,9 @@ export default function ChefsTable() {
                 />
                 <Button
                   onClick={() => setIsBooking(true)}
-                  className="bg-[var(--rust-orange)] text-[var(--soft-cream)] hover:bg-[var(--olive-green)] w-full md:w-auto"
+                  // className="bg-[var(--rust-orange)] text-[var(--soft-cream)] hover:bg-[var(--olive-green)] w-full md:w-auto"
                 >
-                  Book this Experience
+                  Book this experience
                 </Button>
               </div>
             </>
@@ -270,15 +270,11 @@ export default function ChefsTable() {
                     <div
                       className={cn(
                         "w-8 h-8 rounded-full flex items-center justify-center mb-2",
-                        showTicket
-                          ? index === 4
-                            ? "bg-[var(--accent)] "
-                            : "bg-[var(--primary)]"
-                          : step > index
+                        step > index
                           ? "bg-[var(--foreground)] text-[var(--soft-cream)]"
                           : step === index
-                          ? "bg-[var(--foreground)] text-[var(--soft-cream)] "
-                          : "bg-[var(--muted)]  text-[var(--foreground)]"
+                          ? "bg-[var(--foreground)] text-[var(--soft-cream)]"
+                          : "bg-[var(--muted)] text-[var(--foreground)]"
                       )}
                     >
                       {index + 1}
@@ -406,12 +402,7 @@ export default function ChefsTable() {
                         : 0}
                     </p>
                   </div>
-                  <Button
-                    onClick={handleSubmit}
-                    className="w-full bg-[var(--rust-orange)] text-[var(--soft-cream)] hover:bg-[var(--olive-green)]"
-                  >
-                    Confirm and Pay
-                  </Button>
+                  <Button onClick={handleSubmit}>Confirm and Pay</Button>
                 </div>
               )}
 
@@ -453,7 +444,6 @@ export default function ChefsTable() {
                       <Button
                         onClick={() => setStep(step + 1)}
                         disabled={!canProceed()}
-                        className="ml-auto bg-[var(--accent)] text-[var(--soft-cream)] hover:bg-[var(--accent)]/90"
                       >
                         Next
                       </Button>

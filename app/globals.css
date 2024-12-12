@@ -145,6 +145,11 @@ h6 {
   background-color: var(--rust-orange);
 }
 
+
+.bg-foreground {
+  background-color: var(--card-foreground);
+}
+
 .text-dark-blue {
   color: var(--dark-blue);
 }
@@ -152,6 +157,10 @@ h6 {
 
 .bg-calendar {
   background-color: var(--background);
+}
+
+.text-calendar{
+  color: var(--foreground);
 }
 
 .text-olive {
@@ -186,6 +195,10 @@ h6 {
   border-color: var(--tertiary);
 }
 
+.border-secondary {
+  border-color: var(--foreground);
+}
+
 .border-primary {
   border-color: var(--rust-orange);
 }
@@ -197,4 +210,8 @@ h6 {
 
 .nav-text {
   color: var(--nav-text);
+}
+
+.nav-accent {
+  color: var(--accent-foreground);
 }

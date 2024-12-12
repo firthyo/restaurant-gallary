@@ -869,6 +869,9 @@ body{
 .justify-between{
   justify-content: space-between;
 }
+.justify-items-center{
+  justify-items: center;
+}
 .gap-1{
   gap: 0.25rem;
 }
@@ -1015,6 +1018,9 @@ body{
 .border-primary-foreground\/10{
   border-color: hsl(var(--primary-foreground) / 0.1);
 }
+.border-secondary{
+  border-color: hsl(var(--secondary));
+}
 .border-transparent{
   border-color: transparent;
 }
@@ -1099,6 +1105,9 @@ body{
 }
 .bg-destructive{
   background-color: hsl(var(--destructive));
+}
+.bg-foreground{
+  background-color: hsl(var(--foreground));
 }
 .bg-gray-100{
   --tw-bg-opacity: 1;
@@ -1670,6 +1679,11 @@ h6 {
   background-color: var(--rust-orange);
 }
 
+
+.bg-foreground {
+  background-color: var(--card-foreground);
+}
+
 .text-dark-blue {
   color: var(--dark-blue);
 }
@@ -1677,6 +1691,10 @@ h6 {
 
 .bg-calendar {
   background-color: var(--background);
+}
+
+.text-calendar{
+  color: var(--foreground);
 }
 
 .text-olive {
@@ -1711,6 +1729,10 @@ h6 {
   border-color: var(--tertiary);
 }
 
+.border-secondary {
+  border-color: var(--foreground);
+}
+
 .border-primary {
   border-color: var(--rust-orange);
 }
@@ -1722,6 +1744,10 @@ h6 {
 
 .nav-text {
   color: var(--nav-text);
+}
+
+.nav-accent {
+  color: var(--accent-foreground);
 }
 
 .file\:border-0::file-selector-button{
@@ -1855,10 +1881,6 @@ h6 {
   background-color: hsl(var(--destructive) / 0.9);
 }
 
-.hover\:bg-primary\/90:hover{
-  background-color: hsl(var(--primary) / 0.9);
-}
-
 .hover\:bg-secondary\/80:hover{
   background-color: hsl(var(--secondary) / 0.8);
 }
@@ -1929,16 +1951,8 @@ h6 {
   box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
 }
 
-.focus\:ring-\[var\(--olive-green\)\]:focus{
-  --tw-ring-color: var(--olive-green);
-}
-
 .focus\:ring-ring:focus{
   --tw-ring-color: hsl(var(--ring));
-}
-
-.focus\:ring-opacity-50:focus{
-  --tw-ring-opacity: 0.5;
 }
 
 .focus\:ring-offset-2:focus{
@@ -2077,10 +2091,6 @@ h6 {
 }
 
 @media (min-width: 640px){
-
-  .sm\:w-48{
-    width: 12rem;
-  }
 
   .sm\:grid-cols-2{
     grid-template-columns: repeat(2, minmax(0, 1fr));
