@@ -1901,10 +1901,6 @@ h6 {
   color: rgb(255 255 255 / var(--tw-text-opacity, 1));
 }
 
-.hover\:text-accent:hover{
-  color: hsl(var(--accent));
-}
-
 .hover\:underline:hover{
   text-decoration-line: underline;
 }

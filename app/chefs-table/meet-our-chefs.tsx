@@ -110,7 +110,7 @@ export default function MeetOurChefs() {
 
           {/* Quote */}
           <div>
-            <h3 className="text-[#4169E1] text-xl mb-3">MY CULINARY PHILOSOPHY IS...</h3>
+            <h3 className="text-[#4169E1] text-xl mb-3">MY CULINARY PHILOSOPHY IS </h3>
             <p className="font-['Playfair_Display'] italic text-2xl">
               {chefs[selectedChef].quote}
             </p>
