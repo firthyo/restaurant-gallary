@@ -172,7 +172,9 @@ export default function AboutPage() {
                       <h3 className="text-2xl font-serif text-primary mb-2">
                         {item.title}
                       </h3>
-                      <p className="text-muted-foreground">{item.description}</p>
+                      <p className="text-muted-foreground">
+                        {item.description}
+                      </p>
                     </div>
                     <div className="relative flex items-center justify-center w-16 h-16 rounded-full bg-primary text-white font-serif text-xl z-10">
                       {item.year}
@@ -186,7 +188,7 @@ export default function AboutPage() {
         </section>
 
         {/* CTA Section */}
-        <section className="py-20 bg-primary text-white">
+        {/* <section className="py-20 bg-primary text-white">
           <div className="container mx-auto px-4 text-center">
             <h2 className="text-4xl font-serif italic mb-6">Join Us</h2>
             <p className="text-xl mb-8 max-w-2xl mx-auto">
@@ -197,21 +199,22 @@ export default function AboutPage() {
               <Button
                 asChild
                 size="lg"
-                variant="outline"
-                className="border-white text-white hover:bg-white hover:text-primary"
+                variant="calendarOutline"
+                // className="border-white text-white hover:bg-white hover:text-primary"
               >
                 <Link href="/menu">View Menu</Link>
               </Button>
               <Button
                 asChild
                 size="lg"
+
                 className="bg-white text-primary hover:bg-white/90"
               >
                 <Link href="/booking">Make Reservation</Link>
               </Button>
             </div>
           </div>
-        </section>
+        </section> */}
       </main>
 
       <Footer />

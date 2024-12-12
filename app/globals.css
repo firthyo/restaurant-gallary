@@ -200,7 +200,7 @@ h6 {
 }
 
 .border-primary {
-  border-color: var(--rust-orange);
+  border-color: var(--primary);
 }
 
 /* Navigation Styles */

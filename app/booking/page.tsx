@@ -293,7 +293,7 @@ export default function Booking() {
 
         <div className="mt-8 flex justify-between">
           {step > 1 && (
-            <Button onClick={() => setStep(step - 1)} variant="outline">
+            <Button onClick={() => setStep(step - 1)} variant="calendarOutline">
               Back
             </Button>
           )}

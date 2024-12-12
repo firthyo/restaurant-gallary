@@ -411,9 +411,8 @@ export default function ChefsTable() {
                   <h2 className="text-2xl font-bold text-[var(--primary)] mb-4">
                     Your Ticket
                   </h2>
-                  <p className="text-center text-xl text-[var(--accent)] mb-6">
-                    Your booking is confirmed! Thank you for choosing the Chef's
-                    Table Experience.
+                  <p className="text-center text-xl text-[var(--foreground)] mb-6">
+                    Thank you for choosing the Chef's Table Experience.
                   </p>
                   <BookingTicket
                     bookingData={bookingData as Required<BookingData>}
@@ -432,7 +431,7 @@ export default function ChefsTable() {
                     {step > 0 && (
                       <Button
                         onClick={() => setStep(step - 1)}
-                        variant="outline"
+                        variant="calendarOutline"
                       >
                         Back
                       </Button>

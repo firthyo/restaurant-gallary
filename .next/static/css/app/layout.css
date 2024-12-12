@@ -1057,9 +1057,6 @@ body{
   --tw-bg-opacity: 1;
   background-color: rgb(255 245 245 / var(--tw-bg-opacity, 1));
 }
-.bg-\[var\(--accent\)\]{
-  background-color: var(--accent);
-}
 .bg-\[var\(--background\)\]{
   background-color: var(--background);
 }
@@ -1377,9 +1374,6 @@ body{
   --tw-text-opacity: 1;
   color: rgb(219 228 214 / var(--tw-text-opacity, 1));
 }
-.text-\[var\(--accent\)\]{
-  color: var(--accent);
-}
 .text-\[var\(--foreground\)\]{
   color: var(--foreground);
 }
@@ -1394,9 +1388,6 @@ body{
 }
 .text-\[var\(--soft-cream\)\]{
   color: var(--soft-cream);
-}
-.text-accent{
-  color: hsl(var(--accent));
 }
 .text-accent-foreground{
   color: hsl(var(--accent-foreground));
@@ -1734,7 +1725,7 @@ h6 {
 }
 
 .border-primary {
-  border-color: var(--rust-orange);
+  border-color: var(--primary);
 }
 
 /* Navigation Styles */
@@ -1908,6 +1899,10 @@ h6 {
 .hover\:text-white:hover{
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity, 1));
+}
+
+.hover\:text-accent:hover{
+  color: hsl(var(--accent));
 }
 
 .hover\:underline:hover{

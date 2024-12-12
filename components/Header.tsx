@@ -28,7 +28,7 @@ const Header = () => {
                           .replace("'", "")
                           .replace(" ", "-")}`
                   }
-                  className="text-white hover:text-secondary transition-colors"
+                  className="text-white hover:text-white transition-colors"
                 >
                   {item}
                 </Link>

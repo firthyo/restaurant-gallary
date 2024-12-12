@@ -16,7 +16,7 @@ export default function Contact() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
           <div>
-            <h2 className="font-serif text-3xl text-accent mb-6">Get in Touch</h2>
+            <h2 className="font-serif text-3xl text-foreground mb-6">Get in Touch</h2>
             <form className="space-y-6">
               <div>
                 <Label htmlFor="name">Name</Label>
@@ -30,13 +30,13 @@ export default function Contact() {
                 <Label htmlFor="message">Message</Label>
                 <Textarea id="message" placeholder="Your message here..." />
               </div>
-              <Button type="submit" className="bg-accent text-accent-foreground hover:bg-accent/90">
+              <Button type="submit">
                 Send Message
               </Button>
             </form>
           </div>
           <div>
-            <h2 className="font-serif text-3xl text-accent mb-6">Visit Us</h2>
+            <h2 className="font-serif text-3xl text-foreground mb-6">Visit Us</h2>
             <div className="space-y-4 text-foreground">
               <p>123 Art Street</p>
               <p>Culinary City, CC 12345</p>
@@ -44,7 +44,7 @@ export default function Contact() {
               <p>Email: info@museumrestaurant.com</p>
             </div>
             <div className="mt-8">
-              <h3 className="font-serif text-2xl text-primary mb-4">Opening Hours</h3>
+              <h3 className="font-serif text-2xl text-foreground mb-4">Opening Hours</h3>
               <ul className="space-y-2 text-foreground">
                 <li>Monday - Friday: 11:00 AM - 10:00 PM</li>
                 <li>Saturday: 10:00 AM - 11:00 PM</li>
