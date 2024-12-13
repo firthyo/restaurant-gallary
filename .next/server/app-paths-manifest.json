@@ -1,6 +1,7 @@
 {
-  "/not-found": "app/not-found.js",
-  "/chefs-table/page": "app/chefs-table/page.js",
+  "/page": "app/page.js",
+  "/booking/page": "app/booking/page.js",
   "/menu/page": "app/menu/page.js",
-  "/about/page": "app/about/page.js"
+  "/about/page": "app/about/page.js",
+  "/events/page": "app/events/page.js"
 }

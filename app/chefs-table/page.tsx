@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -12,10 +12,11 @@ import { DateTimePicker } from "@/components/ui/date-time-picker";
 import { format } from "date-fns";
 import CustomizeMenu, { CustomizeMenuHandle } from "@/components/CustomizeMenu";
 import BookingTicket from "@/components/BookingTicket";
+import Modal from "@/components/ui/Modal";
 
 // Booking steps
 const steps = [
-  "Select Experience",
+  // "Select Experience",
   "Date and Time",
   "Guest Information",
   "Confirmation",
@@ -108,6 +109,15 @@ export default function ChefsTable() {
     email: "",
     customSelections: [],
   });
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleOpenModal = () => setIsModalOpen(true);
+  const handleCloseModal = () => {
+    resetBooking();
+    setIsModalOpen(false);
+  };
+
   const [showTicket, setShowTicket] = useState(false);
   const customizeMenuRef = useRef<CustomizeMenuHandle>(null);
 
@@ -120,7 +130,6 @@ export default function ChefsTable() {
       ...prev,
       date: selectedDateTime,
     }));
-    setStep(1); // Automatically move to the next step after date selection
   };
 
   const handleInputChange = (
@@ -187,6 +196,12 @@ export default function ChefsTable() {
 
   const selectedCourseDetails =
     courseDetails[bookingData.courseType as "5-course" | "7-course"];
+  useEffect(() => {
+    console.log(step);
+    if (step === 3) {
+      handleOpenModal();
+    }
+  }, [step]);
 
   return (
     <div className="min-h-screen bg-[var(--background)]">
@@ -405,29 +420,38 @@ export default function ChefsTable() {
                   {/* <Button onClick={handleSubmit}>Confirm and Pay</Button> */}
                 </div>
               )}
-
+              {/* <button
+                className="px-4 py-2 bg-blue-500 text-white rounded-md"
+                onClick={handleOpenModal}
+              >
+                Open Ticket
+              </button> */}
               {showTicket && (
-                <div className="space-y-8">
-                  <h2 className="text-2xl font-bold text-[var(--primary)] mb-4">
-                    Your Ticket
-                  </h2>
-                  <p className="text-center text-xl text-[var(--foreground)] mb-6">
-                    Thank you for choosing the Chef's Table Experience.
-                  </p>
-                  <BookingTicket
-                    bookingData={bookingData as Required<BookingData>}
-                    onDownload={handleDownloadTicket}
-                    onShare={handleShareTicket}
-                  />
-                  <Button onClick={resetBooking}>
-                    Book Another Experience
-                  </Button>
-                </div>
+                <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
+                  <div className="space-y-8">
+                    {/* <h2 className="text-2xl font-bold text-[var(--primary)] mb-4 text-center">
+                      Your Ticket
+                    </h2>
+                    <p className="text-center text-xl text-[var(--foreground)] mb-6">
+                      Thank you for choosing the Chef's Table Experience.
+                    </p> */}
+                    <BookingTicket
+                      bookingData={bookingData as Required<BookingData>}
+                      onDownload={handleDownloadTicket}
+                      onShare={handleShareTicket}
+                    />
+                    {/* <div className="flex justify-center mt-4">
+                      <Button onClick={resetBooking}>
+                        Book Another Experience
+                      </Button>
+                    </div> */}
+                  </div>
+                </Modal>
               )}
 
-              <div className="mt-8 flex justify-between">
+              {/* <div className="mt-8 flex justify-between"> */}
                 {!showTicket && (
-                  <>
+                  <div className="mt-8 flex justify-between">
                     {step > 0 && (
                       <Button
                         onClick={() => setStep(step - 1)}
@@ -440,6 +464,7 @@ export default function ChefsTable() {
                       <Button
                         onClick={() => setStep(step + 1)}
                         disabled={!canProceed()}
+                        className="ml-auto"
                       >
                         Next
                       </Button>
@@ -449,12 +474,12 @@ export default function ChefsTable() {
                         onClick={handleSubmit}
                         className="ml-auto hover:bg-[var(--accent)]/90"
                       >
-                        Confirm Booking
+                        Confirm Booking & Get ticket
                       </Button>
                     )}
-                  </>
+                  </div>
                 )}
-              </div>
+              {/* </div> */}
             </div>
           )}
         </div>

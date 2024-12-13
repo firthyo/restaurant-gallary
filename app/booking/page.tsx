@@ -164,8 +164,7 @@ export default function Booking() {
                     <Badge
                       className={cn(
                         "absolute top-2 right-2 bg-secondary text-secondary-foreground",
-                        status === "selected" &&
-                          "bg-secondary text-calendar"
+                        status === "selected" && "bg-secondary text-calendar"
                       )}
                     >
                       {table.location}
@@ -301,7 +300,7 @@ export default function Booking() {
             <Button
               onClick={() => setStep(step + 1)}
               disabled={!canProceed()}
-              className="ml-auto bg-rust-orange text-white hover:bg-rust-orange/10"
+              className="ml-auto"
             >
               Next
             </Button>

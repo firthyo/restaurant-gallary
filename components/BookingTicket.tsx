@@ -39,7 +39,7 @@ const BookingTicket: React.FC<BookingTicketProps> = ({
 
         <div className="space-y-6">
           <div className="text-center space-y-1">
-            <h2 className="text-4xl font-serif tracking-wide">CHEF'S TABLE</h2>
+            <h2 className="text-2xl font-serif tracking-wide">CHEF'S TABLE</h2>
             <p className="text-sm uppercase tracking-wider">
               Museum Restaurant Experience
             </p>
@@ -68,7 +68,7 @@ const BookingTicket: React.FC<BookingTicketProps> = ({
             </div>
           </div>
 
-          <div className="pt-4 space-y-4">
+          {/* <div className="pt-4 space-y-4">
             <div className="flex justify-center">
               <QrCode className="w-24 h-24 text-black/80" />
             </div>
@@ -80,7 +80,7 @@ const BookingTicket: React.FC<BookingTicketProps> = ({
                 {bookingData.confirmationCode}
               </p>
             </div>
-          </div>
+          </div> */}
 
           <div className="flex justify-between gap-4 pt-4">
             <Button

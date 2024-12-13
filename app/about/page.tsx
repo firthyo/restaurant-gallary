@@ -65,13 +65,13 @@ export default function AboutPage() {
         {/* Hero Section */}
         <section className="relative h-[80vh] flex items-center justify-center overflow-hidden hero-bg">
           <div className="absolute inset-0 z-0">
-            <Image
+            {/* <Image
               src="/placeholder.svg?height=1000&width=2000"
               alt="Restaurant Ambiance"
               fill
               className="object-cover"
               priority
-            />
+            /> */}
             <div className="absolute inset-0 bg-black/50" />
           </div>
           <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-4">
