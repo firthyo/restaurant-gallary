@@ -10,7 +10,6 @@ export default function Home() {
       <Header />
 
       <main className="flex-grow ">
-        {/* Hero Section */}
         <section className="relative h-[70vh] flex items-center justify-center bg-[url('https://images.unsplash.com/photo-1593908717414-78a92b700feb?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')] bg-cover bg-center bg-no-repeat ">
           <div className="absolute inset-0 bg-black/30"></div>
           <div className="relative z-10 text-center text-white ">
@@ -80,7 +79,7 @@ export default function Home() {
                   the aesthetics of fine dining. Each dish is a masterpiece,
                   crafted to delight both your palate and your eyes.
                 </p>
-                <Button asChild variant="calendarOutline" >
+                <Button asChild variant="calendarOutline">
                   <Link href="/about">Discover Our Story</Link>
                 </Button>
               </div>
