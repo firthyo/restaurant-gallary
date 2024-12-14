@@ -3,10 +3,10 @@
   "/page": "/",
   "/contact/page": "/contact",
   "/about/page": "/about",
-  "/events/page": "/events",
   "/chefs-table/page": "/chefs-table",
+  "/events/page": "/events",
   "/booking/page": "/booking",
-  "/menu/page": "/menu",
   "/our-team/page": "/our-team",
-  "/recipes/page": "/recipes"
+  "/recipes/page": "/recipes",
+  "/menu/page": "/menu"
 }

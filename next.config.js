@@ -9,6 +9,9 @@ const nextConfig = {
       },
     ],
   },
+  output: "export",
+  basePath: "/restaurant-gallary",
+  assetPrefix: "/restaurant-gallary",
 };
 
 module.exports = nextConfig;
