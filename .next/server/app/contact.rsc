@@ -1,8 +1,8 @@
 1:HL["/_next/static/media/a34f9d1faa5f3315-s.p.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 2:HL["/_next/static/css/0c7106e586d97a0a.css","style",{"crossOrigin":""}]
-0:["I_GNBGvASlup9O5Tu6GsH",[[["",{"children":["contact",{"children":["__PAGE__",{}]}]},"$undefined","$undefined",true],"$L3",[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/0c7106e586d97a0a.css","precedence":"next","crossOrigin":""}]],"$L4"]]]]
-5:I{"id":1443,"chunks":["272:static/chunks/webpack-756616a00663e934.js","971:static/chunks/fd9d1056-776ef5b597298528.js","864:static/chunks/864-17a5bf7c988e749d.js"],"name":"","async":false}
-6:I{"id":8639,"chunks":["272:static/chunks/webpack-756616a00663e934.js","971:static/chunks/fd9d1056-776ef5b597298528.js","864:static/chunks/864-17a5bf7c988e749d.js"],"name":"","async":false}
+0:["lw4CBkvD_bU-RqDqwbk94",[[["",{"children":["contact",{"children":["__PAGE__",{}]}]},"$undefined","$undefined",true],"$L3",[[["$","link","0",{"rel":"stylesheet","href":"/_next/static/css/0c7106e586d97a0a.css","precedence":"next","crossOrigin":""}]],"$L4"]]]]
+5:I{"id":1443,"chunks":["272:static/chunks/webpack-42abeea28218545b.js","971:static/chunks/fd9d1056-776ef5b597298528.js","864:static/chunks/864-17a5bf7c988e749d.js"],"name":"","async":false}
+6:I{"id":8639,"chunks":["272:static/chunks/webpack-42abeea28218545b.js","971:static/chunks/fd9d1056-776ef5b597298528.js","864:static/chunks/864-17a5bf7c988e749d.js"],"name":"","async":false}
 8:I{"id":4724,"chunks":["724:static/chunks/724-5354a33a3be3390c.js","649:static/chunks/649-fb9644123816a113.js","327:static/chunks/app/contact/page-7fcdc241fd18f943.js"],"name":"","async":false}
 9:I{"id":6672,"chunks":["724:static/chunks/724-5354a33a3be3390c.js","649:static/chunks/649-fb9644123816a113.js","327:static/chunks/app/contact/page-7fcdc241fd18f943.js"],"name":"Label","async":false}
 4:[["$","meta","0",{"charSet":"utf-8"}],["$","title","1",{"children":"Museum Restaurant"}],["$","meta","2",{"name":"description","content":"Experience culinary art in a museum-inspired setting"}],["$","meta","3",{"name":"viewport","content":"width=device-width, initial-scale=1"}],["$","meta","4",{"name":"next-size-adjust"}]]
