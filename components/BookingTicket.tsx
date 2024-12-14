@@ -6,7 +6,7 @@ import { QrCode } from "lucide-react";
 
 interface BookingTicketProps {
   bookingData: {
-    date: Date;
+    date: Date | null;
     guests: number;
     name: string;
     confirmationCode: string;
@@ -50,18 +50,24 @@ const BookingTicket: React.FC<BookingTicketProps> = ({
               <span className="uppercase tracking-wider">Guest</span>
               <span className="font-serif text-lg">{bookingData.name}</span>
             </div>
-            <div className="flex justify-between items-center border-b border-black/10 pb-2">
-              <span className="uppercase tracking-wider">Date</span>
-              <span className="font-serif text-lg">
-                {format(bookingData.date, "MMMM d, yyyy")}
-              </span>
-            </div>
-            <div className="flex justify-between items-center border-b border-black/10 pb-2">
-              <span className="uppercase tracking-wider">Time</span>
-              <span className="font-serif text-lg">
-                {format(bookingData.date, "h:mm a")}
-              </span>
-            </div>
+            {bookingData.date && (
+              <div className="flex justify-between items-center border-b border-black/10 pb-2">
+                <span className="uppercase tracking-wider">Date</span>
+                <span className="font-serif text-lg">
+                  {format(bookingData.date, "MMMM d, yyyy")}
+                </span>
+              </div>
+            )}
+
+            {bookingData.date && (
+              <div className="flex justify-between items-center border-b border-black/10 pb-2">
+                <span className="uppercase tracking-wider">Time</span>
+                <span className="font-serif text-lg">
+                  {format(bookingData.date, "h:mm a")}
+                </span>
+              </div>
+            )}
+
             <div className="flex justify-between items-center border-b border-black/10 pb-2">
               <span className="uppercase tracking-wider">Guests</span>
               <span className="font-serif text-lg">{bookingData.guests}</span>

@@ -102,7 +102,7 @@ export default function ChefsTable() {
   const [bookingData, setBookingData] = useState<BookingData>({
     courseType: "5-course",
     dietaryRestrictions: "",
-    date: null,
+    date: new Date(),
     guests: 1,
     name: "",
     phone: "",
@@ -450,35 +450,35 @@ export default function ChefsTable() {
               )}
 
               {/* <div className="mt-8 flex justify-between"> */}
-                {!showTicket && (
-                  <div className="mt-8 flex justify-between">
-                    {step > 0 && (
-                      <Button
-                        onClick={() => setStep(step - 1)}
-                        variant="calendarOutline"
-                      >
-                        Back
-                      </Button>
-                    )}
-                    {step < 3 && (
-                      <Button
-                        onClick={() => setStep(step + 1)}
-                        disabled={!canProceed()}
-                        className="ml-auto"
-                      >
-                        Next
-                      </Button>
-                    )}
-                    {step === 3 && (
-                      <Button
-                        onClick={handleSubmit}
-                        className="ml-auto hover:bg-[var(--accent)]/90"
-                      >
-                        Confirm Booking & Get ticket
-                      </Button>
-                    )}
-                  </div>
-                )}
+              {!showTicket && (
+                <div className="mt-8 flex justify-between">
+                  {step > 0 && (
+                    <Button
+                      onClick={() => setStep(step - 1)}
+                      variant="calendarOutline"
+                    >
+                      Back
+                    </Button>
+                  )}
+                  {step < 3 && (
+                    <Button
+                      onClick={() => setStep(step + 1)}
+                      disabled={!canProceed()}
+                      className="ml-auto"
+                    >
+                      Next
+                    </Button>
+                  )}
+                  {step === 3 && (
+                    <Button
+                      onClick={handleSubmit}
+                      className="ml-auto hover:bg-[var(--accent)]/90"
+                    >
+                      Confirm Booking & Get ticket
+                    </Button>
+                  )}
+                </div>
+              )}
               {/* </div> */}
             </div>
           )}
