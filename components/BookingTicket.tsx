@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { format } from "date-fns";
-import { QrCode } from "lucide-react";
 import { QRCodeSVG } from "qrcode.react";
 
 interface BookingTicketProps {
@@ -57,7 +56,7 @@ const BookingTicket: React.FC<BookingTicketProps> = ({
           <div className="text-center space-y-1">
             <h2 className="text-2xl font-serif tracking-wide">CHEF'S TABLE</h2>
             <p className="text-sm uppercase tracking-wider">
-              Museum Restaurant Experience
+              Restaurant Gallary Experience
             </p>
           </div>
 
@@ -70,7 +69,7 @@ const BookingTicket: React.FC<BookingTicketProps> = ({
               <div className="flex justify-between items-center border-b border-black/10 pb-2">
                 <span className="uppercase tracking-wider">Date</span>
                 <span className="font-serif text-lg">
-                  {format(bookingData.date, "MMMM d, yyyy")}
+                  {format(bookingData.date, "MMMM do, yyyy")}
                 </span>
               </div>
             )}

@@ -10,23 +10,21 @@ import { Badge } from "@/components/ui/badge";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { DateTimePicker } from "@/components/ui/date-time-picker";
-
-const tables = [
-  { id: "1", name: "Table 1", location: "window", capacity: 2 },
-  { id: "2", name: "Table 2", location: "window", capacity: 2 },
-  { id: "3", name: "Table 3", location: "center", capacity: 4 },
-  { id: "4", name: "Table 4", location: "center", capacity: 4 },
-  { id: "5", name: "Table 5", location: "booth", capacity: 6 },
-  { id: "6", name: "Table 6", location: "booth", capacity: 6 },
-  { id: "7", name: "Table 7", location: "bar", capacity: 2 },
-  { id: "8", name: "Table 8", location: "bar", capacity: 2 },
-];
+import FormBookingChef from "@/components/ui/form";
+import { tables } from "@/components/data/table";
+import Modal from "@/components/ui/Modal";
+import BookingTicket from "@/components/BookingTicket";
+import { format } from "date-fns";
+import { RadioCards } from "@/components/ui/radio-card";
+import { Mail, Mails, MessageSquare } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 type TableStatus = "available" | "selected" | "unavailable";
 
 interface BookingData {
   table: string | null;
   dateTime: Date | null;
+  guests: number;
   name: string;
   email: string;
   phone: string;
@@ -38,10 +36,46 @@ export default function Booking() {
   const [bookingData, setBookingData] = useState<BookingData>({
     table: null,
     dateTime: null,
+    guests: 1,
     name: "",
     email: "",
     phone: "",
     specialRequests: "",
+  });
+  const [isBooking, setIsBooking] = useState(false);
+
+  const [showTicket, setShowTicket] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const handleOpenModal = () => setIsModalOpen(true);
+  const handleCloseModal = () => {
+    resetBooking();
+    setIsModalOpen(false);
+  };
+
+  const resetBooking = () => {
+    setBookingData({
+      table: null,
+      dateTime: null,
+      guests: 1,
+      name: "",
+      phone: "",
+      email: "",
+      specialRequests: "",
+    });
+    setIsBooking(false);
+    setStep(0);
+    setShowTicket(false);
+  };
+  const [errors, setErrors] = useState<{
+    guests: string | null;
+    name: string | null;
+    phone: string | null;
+    email: string | null;
+  }>({
+    guests: null,
+    name: null,
+    phone: null,
+    email: null,
   });
 
   const getTableStatus = (tableId: string): TableStatus => {
@@ -72,7 +106,24 @@ export default function Booking() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    const confirmationCode = Math.random()
+      .toString(36)
+      .substring(2, 10)
+      .toUpperCase();
+    setBookingData((prev) => ({ ...prev, confirmationCode }));
+    setShowTicket(true);
     console.log("Booking confirmed:", bookingData);
+  };
+  const [isPopupOpen, setIsPopupOpen] = useState(false); // For popup
+  const router = useRouter(); // For navigation
+
+  const handleConfirm = () => {
+    setIsPopupOpen(true); // Show popup
+  };
+
+  const handlePopupClose = () => {
+    setIsPopupOpen(false); // Close popup
+    router.push("/"); // Redirect to home
   };
 
   const canProceed = () => {
@@ -104,6 +155,7 @@ export default function Booking() {
             "Choose Date & Time",
             "Customer Info",
             "Confirm Booking",
+            "Notification Preferences",
           ].map((stepName, index) => (
             <div key={index} className="flex flex-col items-center">
               <div
@@ -203,49 +255,22 @@ export default function Booking() {
               Step 3: Customer Information
             </h2>
             <form className="space-y-4">
-              <div>
-                <Label htmlFor="name">Name</Label>
-                <Input
-                  id="name"
-                  name="name"
-                  value={bookingData.name}
-                  onChange={handleInputChange}
-                  required
-                />
-              </div>
-              <div>
-                <Label htmlFor="email">Email</Label>
-                <Input
-                  id="email"
-                  name="email"
-                  type="email"
-                  value={bookingData.email}
-                  onChange={handleInputChange}
-                  required
-                />
-              </div>
-              <div>
-                <Label htmlFor="phone">Phone</Label>
-                <Input
-                  id="phone"
-                  name="phone"
-                  type="tel"
-                  value={bookingData.phone}
-                  onChange={handleInputChange}
-                  required
-                />
-              </div>
-              <div>
-                <Label htmlFor="specialRequests">
-                  Special Requests (Optional)
-                </Label>
-                <Textarea
-                  id="specialRequests"
-                  name="specialRequests"
-                  value={bookingData.specialRequests}
-                  onChange={handleInputChange}
-                />
-              </div>
+              <FormBookingChef
+                formData={{
+                  guests: bookingData.guests,
+                  name: bookingData.name,
+                  phone: bookingData.phone,
+                  email: bookingData.email,
+                }}
+                errors={{
+                  guests: errors.guests,
+                  name: errors.name,
+                  phone: errors.phone,
+                  email: errors.email,
+                }}
+                onInputChange={handleInputChange}
+                onSubmit={handleSubmit}
+              />
             </form>
           </div>
         )}
@@ -255,7 +280,7 @@ export default function Booking() {
             <h2 className="text-2xl font-bold text-olive mb-4">
               Step 4: Confirm Booking
             </h2>
-            <div className="bg-card p-6 rounded-lg shadow-md mb-6">
+            <div className="bg-white p-6 rounded-xl shadow-md text-left">
               <h3 className="text-xl font-semibold mb-4">Booking Summary</h3>
               <p>
                 <strong>Table:</strong>{" "}
@@ -263,7 +288,9 @@ export default function Booking() {
               </p>
               <p>
                 <strong>Date & Time:</strong>{" "}
-                {bookingData.dateTime?.toLocaleString()}
+                {bookingData.dateTime
+                  ? format(bookingData.dateTime, "PPP 'at' p")
+                  : "Not selected"}
               </p>
               <p>
                 <strong>Name:</strong> {bookingData.name}
@@ -281,12 +308,52 @@ export default function Booking() {
                 </p>
               )}
             </div>
-            <Button
-              onClick={handleSubmit}
-              className="w-full bg-accent text-accent-foreground hover:bg-accent/90"
-            >
-              Confirm Booking
-            </Button>
+          </div>
+        )}
+        {step === 5 && (
+          <div className="space-y-8">
+            <h2 className="text-2xl font-bold text-[var(--olive-green)] mb-4">
+              Choose your preferred notification method:
+            </h2>
+            <div className="max-w-md mx-auto">
+              <RadioCards.Root
+                defaultValue="1"
+                columns={{ initial: "1", sm: "3" }}
+              >
+                <RadioCards.Item value="1">
+                  <div className="flex flex-col w-full items-start space-y-2">
+                    <div className="flex items-center space-x-2">
+                      <MessageSquare className="text-blue-500 w-5 h-5" />
+                      <span className="font-bold text-gray-800">Email</span>
+                      <span className="text-gray-600">{bookingData.phone}</span>
+                    </div>
+                  </div>
+                </RadioCards.Item>
+                <RadioCards.Item value="2">
+                  <div className="flex flex-col w-full items-start space-y-2">
+                    <div className="flex items-center space-x-2">
+                      <Mail className="text-blue-500 w-5 h-5" />
+                      <span className="font-bold text-gray-800">SMS</span>
+                      <span className="text-gray-600">{bookingData.email}</span>
+                    </div>
+                  </div>
+                </RadioCards.Item>
+                <RadioCards.Item value="3">
+                  <div className="flex flex-col w-full items-start space-y-2">
+                    <div className="flex items-center space-x-2">
+                      <Mails className="text-blue-500 w-5 h-5" />
+                      <span className="font-bold text-gray-800">Both</span>
+                      <div className="flex flex-col text-left">
+                        <span className="text-gray-600">
+                          Email : {bookingData.phone} <br />
+                          Phone : {bookingData.email}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </RadioCards.Item>
+              </RadioCards.Root>
+            </div>
           </div>
         )}
 
@@ -296,7 +363,7 @@ export default function Booking() {
               Back
             </Button>
           )}
-          {step < 4 && (
+          {step <= 4 && (
             <Button
               onClick={() => setStep(step + 1)}
               disabled={!canProceed()}
@@ -305,10 +372,33 @@ export default function Booking() {
               Next
             </Button>
           )}
+          {step === 5 && (
+            <Button onClick={handleConfirm} className="ml-auto">
+              Confirm
+            </Button>
+          )}
         </div>
       </main>
 
       <Footer />
+
+      {isPopupOpen && (
+        <Modal isOpen={isPopupOpen} onClose={handlePopupClose}>
+          <div className="bg-white p-6 rounded-lg shadow-lg text-center">
+            <h2 className="text-lg font-bold mb-4">Booking Confirmed</h2>
+            <p className="text-gray-600 mb-4">
+              Your booking has been confirmed. You will receive a notification
+              soon.
+            </p>
+            <Button
+              onClick={handlePopupClose}
+              className="bg-blue-500 text-white"
+            >
+              Back to Home
+            </Button>
+          </div>
+        </Modal>
+      )}
     </div>
   );
 }

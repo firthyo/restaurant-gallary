@@ -32,7 +32,8 @@ const recipes = [
     subtitle: "Clams",
     description:
       "Put the clams in a saucepan with a cup of water, cover and cook on a high heat. remove the clams as soon as they open, leave them to cool and remove half the clams from their shell. Here mignionette. In a bowl...",
-    image: "https://images.unsplash.com/photo-1448043552756-e747b7a2b2b8?w=500&auto=format&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1448043552756-e747b7a2b2b8?w=500&auto=format&fit=crop",
   },
   {
     id: 3,
@@ -41,7 +42,8 @@ const recipes = [
     subtitle: "Bread rolls",
     description:
       "In response to the need to preserve fresh fish, the smoking technique emerged in the 7th century. To achieve optimum quality in applying this method, the freshness and quality of the salmon are of...",
-    image: "https://images.unsplash.com/photo-1509957879660-dd8846a0b43d?q=80&w=2072&auto=format&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1509957879660-dd8846a0b43d?q=80&w=2072&auto=format&fit=crop",
   },
 ];
 
@@ -49,21 +51,24 @@ const chefs = [
   {
     name: "JULIA CHILD",
     title: "Chef",
-    image: "https://images.unsplash.com/photo-1731576089270-9e806089a40f?w=500&auto=format&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1731576089270-9e806089a40f?w=500&auto=format&fit=crop",
     quote:
       "Fresh ingredients are essential for a healthy, balanced diet. If you want to eat better and feel healthier, you should eat food prepared with fresh locally-grown ingredients and avoid prepackaged, processed foods.",
   },
   {
     name: "ALEX OLIVER",
     title: "Chef",
-    image: "https://images.unsplash.com/photo-1541614101331-1a5a3a194e92?w=500&auto=format&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1541614101331-1a5a3a194e92?w=500&auto=format&fit=crop",
     quote:
       "Healthy meals don't need to be boring with these delicious family friendly recipes and ideas from Jamie Oliver, packed with nutrition and flavour.",
   },
   {
     name: "JOSE RAMSAY",
     title: "Chef",
-    image: "https://images.unsplash.com/photo-1669707569583-8d4c8051130a?w=500&auto=format&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1669707569583-8d4c8051130a?w=500&auto=format&fit=crop",
     quote:
       "The secret of a good meal is not just the recipe but the passion and attention to detail in its preparation.",
   },
@@ -83,7 +88,6 @@ export default function Recipes() {
 
       <main className="flex-grow container mx-auto px-4 py-12">
         <div className="mb-12">
-          <span className="text-sm text-muted-foreground">2 NEW</span>
           <h1 className="font-serif text-5xl md:text-6xl italic text-primary mt-2">
             ALL
             <br />

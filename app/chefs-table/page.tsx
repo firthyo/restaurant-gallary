@@ -108,6 +108,7 @@ export default function ChefsTable() {
       .toUpperCase();
     setBookingData((prev) => ({ ...prev, customSelections, confirmationCode }));
     setShowTicket(true);
+    sendEmail();
   };
 
   const handleDownloadTicket = () => {
@@ -134,6 +135,34 @@ export default function ChefsTable() {
     setIsBooking(false);
     setStep(0);
     setShowTicket(false);
+  };
+
+  const sendSMS = async () => {
+    const response = await fetch("/api/send-sms", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        phone: "+1234567890", // User's phone number
+        message: "Your booking is confirmed!",
+      }),
+    });
+
+    const data = await response.json();
+    console.log(data);
+  };
+  const sendEmail = async () => {
+    const response = await fetch("http://localhost:3000/api/send-email", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        to: bookingData.email,
+        subject: "Booking Confirmation",
+        text: "Your booking is confirmed for December 15th at 8:00 PM!",
+      }),
+    });
+
+    const data = await response.json();
+    console.log(data);
   };
 
   useEffect(() => {
