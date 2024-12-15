@@ -75,7 +75,7 @@ export default function Home() {
                   Our Culinary Canvas
                 </h2>
                 <p className="text-muted-foreground mb-6">
-                  At Museum Restaurant, we blend the artistry of cooking with
+                  At Restaurant Gallary, we blend the artistry of cooking with
                   the aesthetics of fine dining. Each dish is a masterpiece,
                   crafted to delight both your palate and your eyes.
                 </p>
