@@ -141,7 +141,9 @@ const CustomizeMenu = forwardRef<CustomizeMenuHandle, CustomizeMenuProps>(
               {items.map((item) => (
                 <button
                   key={item}
-                  ref={(el) => (itemRefs.current[item] = el)}
+                  ref={(el) => {
+                    itemRefs.current[item] = el;
+                  }}
                   onClick={() => toggleSelection(item)}
                   className={cn(
                     "p-4 text-left transition-all duration-300 relative",
