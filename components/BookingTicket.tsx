@@ -74,33 +74,19 @@ const BookingTicket: React.FC<BookingTicketProps> = ({
             </div>
           </div>
 
-          {/* <div className="pt-4 space-y-4">
-            <div className="flex justify-center">
-              <QrCode className="w-24 h-24 text-black/80" />
-            </div>
-            <div className="text-center space-y-1">
-              <p className="text-xs uppercase tracking-wider text-black/60">
-                Confirmation Code
-              </p>
-              <p className="font-mono text-lg">
-                {bookingData.confirmationCode}
-              </p>
-            </div>
-          </div> */}
-
           <div className="flex justify-between gap-4 pt-4">
-            <Button
-              onClick={onDownload}
-              className="flex-1 bg-black text-white hover:bg-black/90"
-            >
-              Download
-            </Button>
             <Button
               onClick={onShare}
               variant="outline"
-              className="flex-1 border-black text-black hover:bg-black/5"
+              className="flex-1 border-[var(--card-foreground)] text-[var(--card-foreground)]"
             >
               Share
+            </Button>
+            <Button
+              onClick={onDownload}
+              className="flex-1 bg-[var(--card-foreground)] text-white "
+            >
+              Download
             </Button>
           </div>
         </div>

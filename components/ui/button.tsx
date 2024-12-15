@@ -11,8 +11,7 @@ const buttonVariants = cva(
       variant: {
         default: "bg-foreground text-white",
         calendar: "bg-foreground text-white",
-        calendarOutline:
-          "border text-calendar  bg-background ",
+        calendarOutline: "border text-calendar bg-background",
         destructive:
           "bg-destructive text-destructive-foreground hover:bg-destructive/90",
         outline: "border border-primary text-rust-orange  bg-background ",

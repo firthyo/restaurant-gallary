@@ -2,8 +2,6 @@
 
 import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
 import Header from "@/components/Header";
@@ -13,6 +11,12 @@ import { format } from "date-fns";
 import CustomizeMenu, { CustomizeMenuHandle } from "@/components/CustomizeMenu";
 import BookingTicket from "@/components/BookingTicket";
 import Modal from "@/components/ui/Modal";
+import * as CheckboxPrimitive from "@radix-ui/react-checkbox";
+
+import { courseDetails } from "@/components/data/course";
+import FormBookingChef from "@/components/ui/form";
+import { CheckIcon, Mail, Mails, MessageSquare } from "lucide-react";
+import { RadioCards } from "@/components/ui/radio-card";
 
 // Booking steps
 const steps = [
@@ -20,7 +24,7 @@ const steps = [
   "Date and Time",
   "Guest Information",
   "Confirmation",
-  "Your Ticket",
+  "Notification Preferences",
 ];
 
 interface BookingData {
@@ -34,67 +38,6 @@ interface BookingData {
   customSelections: string[];
   confirmationCode?: string;
 }
-
-const courseDetails = {
-  "5-course": {
-    price: 150,
-    courses: [
-      {
-        title: "Amuse-bouche",
-        description: "Chef's daily inspiration",
-      },
-      {
-        title: "First Course",
-        description: "Seasonal garden vegetables with herb emulsion",
-      },
-      {
-        title: "Second Course",
-        description: "Wild-caught seafood selection",
-      },
-      {
-        title: "Main Course",
-        description: "Choice of land or sea",
-      },
-      {
-        title: "Dessert",
-        description: "Artisanal sweet creation",
-      },
-    ],
-  },
-  "7-course": {
-    price: 200,
-    courses: [
-      {
-        title: "Amuse-bouche",
-        description: "Chef's daily inspiration",
-      },
-      {
-        title: "First Course",
-        description: "Seasonal garden vegetables with herb emulsion",
-      },
-      {
-        title: "Second Course",
-        description: "Wild-caught seafood selection",
-      },
-      {
-        title: "Third Course",
-        description: "Handmade pasta with seasonal truffle",
-      },
-      {
-        title: "Fourth Course",
-        description: "Aged beef tartare with caviar",
-      },
-      {
-        title: "Main Course",
-        description: "Choice of land or sea",
-      },
-      {
-        title: "Dessert",
-        description: "Artisanal sweet creation",
-      },
-    ],
-  },
-};
 
 export default function ChefsTable() {
   const [isBooking, setIsBooking] = useState(false);
@@ -110,6 +53,18 @@ export default function ChefsTable() {
     customSelections: [],
   });
 
+  const [errors, setErrors] = useState<{
+    guests: string | null;
+    name: string | null;
+    phone: string | null;
+    email: string | null;
+  }>({
+    guests: null,
+    name: null,
+    phone: null,
+    email: null,
+  });
+
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleOpenModal = () => setIsModalOpen(true);
@@ -120,6 +75,7 @@ export default function ChefsTable() {
 
   const [showTicket, setShowTicket] = useState(false);
   const customizeMenuRef = useRef<CustomizeMenuHandle>(null);
+  const [checked, setChecked] = useState<boolean | "indeterminate">(false);
 
   const handleCourseTypeSelect = (type: "5-course" | "7-course" | "custom") => {
     setBookingData((prev) => ({ ...prev, courseType: type }));
@@ -137,6 +93,10 @@ export default function ChefsTable() {
   ) => {
     const { name, value } = e.target;
     setBookingData((prev) => ({ ...prev, [name]: value }));
+    setErrors((prev) => ({
+      ...prev,
+      [name]: null,
+    }));
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -176,17 +136,37 @@ export default function ChefsTable() {
     setShowTicket(false);
   };
 
+  useEffect(() => {
+    if (step === 1) {
+      const { guests, name, phone, email } = bookingData;
+      setErrors({
+        guests: guests > 0 ? null : "Number of guests must be at least 1.",
+        name: name ? null : "Name is required.",
+        phone: phone ? null : "Phone number is required.",
+        email:
+          email && /\S+@\S+\.\S+/.test(email)
+            ? null
+            : "A valid email is required.",
+      });
+    }
+  }, [bookingData, step]);
+
   const canProceed = () => {
     switch (step) {
       case 0:
         return bookingData.date !== null;
       case 1:
-        return (
-          bookingData.guests > 0 &&
-          bookingData.name &&
-          bookingData.phone &&
-          bookingData.email
-        );
+        const { guests, name, phone, email } = bookingData;
+        const hasErrors = {
+          guests: guests > 0 ? null : "Number of guests must be at least 1.",
+          name: name ? null : "Name is required.",
+          phone: phone ? null : "Phone number is required.",
+          email:
+            email && /\S+@\S+\.\S+/.test(email)
+              ? null
+              : "A valid email is required.",
+        };
+        return Object.values(hasErrors).every((error) => error === null);
       case 2:
         return true;
       default:
@@ -317,50 +297,22 @@ export default function ChefsTable() {
                     Guest Information
                   </h2>
                   <form className="space-y-4">
-                    <div className="text-center">
-                      <Label htmlFor="guests">Number of Guests</Label>
-                      <Input
-                        id="guests"
-                        name="guests"
-                        type="number"
-                        min="1"
-                        value={bookingData.guests}
-                        onChange={handleInputChange}
-                        required
-                      />
-                    </div>
-                    <div>
-                      <Label htmlFor="name">Name</Label>
-                      <Input
-                        id="name"
-                        name="name"
-                        value={bookingData.name}
-                        onChange={handleInputChange}
-                        required
-                      />
-                    </div>
-                    <div>
-                      <Label htmlFor="phone">Phone</Label>
-                      <Input
-                        id="phone"
-                        name="phone"
-                        type="tel"
-                        value={bookingData.phone}
-                        onChange={handleInputChange}
-                        required
-                      />
-                    </div>
-                    <div>
-                      <Label htmlFor="email">Email</Label>
-                      <Input
-                        id="email"
-                        name="email"
-                        type="email"
-                        value={bookingData.email}
-                        onChange={handleInputChange}
-                        required
-                      />
-                    </div>
+                    <FormBookingChef
+                      formData={{
+                        guests: bookingData.guests,
+                        name: bookingData.name,
+                        phone: bookingData.phone,
+                        email: bookingData.email,
+                      }}
+                      errors={{
+                        guests: errors.guests,
+                        name: errors.name,
+                        phone: errors.phone,
+                        email: errors.email,
+                      }}
+                      onInputChange={handleInputChange}
+                      onSubmit={handleSubmit}
+                    />
                   </form>
                 </div>
               )}
@@ -370,16 +322,16 @@ export default function ChefsTable() {
                   <h2 className="text-2xl font-bold text-[var(--olive-green)] mb-4">
                     Confirm Your Booking
                   </h2>
-                  <div className="bg-white p-6 rounded-lg shadow-md text-left">
+                  <div className="bg-white p-6 rounded-xl shadow-md text-left">
                     <h3 className="text-xl font-semibold mb-4">
                       Booking Summary
                     </h3>
                     <p>
-                      <strong>Experience:</strong> {bookingData.courseType}{" "}
+                      <strong>Experience:</strong> {bookingData.courseType}
                       Experience
                     </p>
                     <p>
-                      <strong>Date & Time:</strong>{" "}
+                      <strong>Date & Time:</strong>
                       {bookingData.date
                         ? format(bookingData.date, "PPP 'at' p")
                         : "Not selected"}
@@ -426,25 +378,68 @@ export default function ChefsTable() {
               >
                 Open Ticket
               </button> */}
+              {step === 3 && (
+                <div className="space-y-8">
+                  <h2 className="text-2xl font-bold text-[var(--olive-green)] mb-4">
+                    Choose your preferred notification method:
+                  </h2>
+                  <div className="max-w-md mx-auto">
+                    <RadioCards.Root
+                      defaultValue="1"
+                      columns={{ initial: "1", sm: "3" }}
+                    >
+                      <RadioCards.Item value="1">
+                        <div className="flex flex-col w-full items-start space-y-2">
+                          <div className="flex items-center space-x-2">
+                            <MessageSquare className="text-blue-500 w-5 h-5" />
+                            <span className="font-bold text-gray-800">
+                              Email
+                            </span>
+                            <span className="text-gray-600">
+                              {bookingData.phone}
+                            </span>
+                          </div>
+                        </div>
+                      </RadioCards.Item>
+                      <RadioCards.Item value="2">
+                        <div className="flex flex-col w-full items-start space-y-2">
+                          <div className="flex items-center space-x-2">
+                            <Mail className="text-blue-500 w-5 h-5" />
+                            <span className="font-bold text-gray-800">SMS</span>
+                            <span className="text-gray-600">
+                              {bookingData.email}
+                            </span>
+                          </div>
+                        </div>
+                      </RadioCards.Item>
+                      <RadioCards.Item value="3">
+                        <div className="flex flex-col w-full items-start space-y-2">
+                          <div className="flex items-center space-x-2">
+                            <Mails className="text-blue-500 w-5 h-5" />
+                            <span className="font-bold text-gray-800">
+                              Both
+                            </span>
+                            <div className="flex flex-col text-left">
+                              <span className="text-gray-600">
+                                Email : {bookingData.phone} <br />
+                                Phone : {bookingData.email}
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </RadioCards.Item>
+                    </RadioCards.Root>
+                  </div>
+                </div>
+              )}
               {showTicket && (
                 <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
                   <div className="space-y-8">
-                    {/* <h2 className="text-2xl font-bold text-[var(--primary)] mb-4 text-center">
-                      Your Ticket
-                    </h2>
-                    <p className="text-center text-xl text-[var(--foreground)] mb-6">
-                      Thank you for choosing the Chef's Table Experience.
-                    </p> */}
                     <BookingTicket
                       bookingData={bookingData as Required<BookingData>}
                       onDownload={handleDownloadTicket}
                       onShare={handleShareTicket}
                     />
-                    {/* <div className="flex justify-center mt-4">
-                      <Button onClick={resetBooking}>
-                        Book Another Experience
-                      </Button>
-                    </div> */}
                   </div>
                 </Modal>
               )}
