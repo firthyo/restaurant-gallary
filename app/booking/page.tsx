@@ -92,6 +92,15 @@ export default function Booking() {
       }));
     }
   };
+  const handleDownloadTicket = () => {
+    // Implement PDF download logic here
+    console.log("Downloading ticket...");
+  };
+
+  const handleShareTicket = () => {
+    // Implement sharing logic here
+    console.log("Sharing ticket...");
+  };
 
   const handleDateTimeSelect = (dateTime: Date) => {
     setBookingData((prev) => ({ ...prev, dateTime }));

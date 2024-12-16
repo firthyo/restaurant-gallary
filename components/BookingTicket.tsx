@@ -78,7 +78,7 @@ const BookingTicket: React.FC<BookingTicketProps> = ({
               <div className="flex justify-between items-center border-b border-black/10 pb-2">
                 <span className="uppercase tracking-wider">Time</span>
                 <span className="font-serif text-lg">
-                  {format(bookingData.date, "h:mm a")}
+                  {format(bookingData.date, "h:mm")}
                 </span>
               </div>
             )}
